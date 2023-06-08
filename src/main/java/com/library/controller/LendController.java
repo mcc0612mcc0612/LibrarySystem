@@ -3,6 +3,8 @@ package com.library.controller;
 import com.library.bean.ReaderCard;
 import com.library.service.BookService;
 import com.library.service.LendService;
+import com.library.service.ReserveService;
+import com.library.service.ReaderCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,12 @@ public class LendController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private ReserveService reserveService;
+
+    @Autowired
+    private ReaderCardService readerCardService;
 
     @RequestMapping("/deletebook.html")
     public String deleteBook(HttpServletRequest request, RedirectAttributes redirectAttributes) {
@@ -60,10 +68,17 @@ public class LendController {
     public String bookLend(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         long bookId = Long.parseLong(request.getParameter("bookId"));
         long readerId = ((ReaderCard) request.getSession().getAttribute("readercard")).getReaderId();
-        if (lendService.lendBook(bookId, readerId)) {
-            redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
-        } else {
-            redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
+        int borrow_times = readerCardService.getBorrowTime(readerId);
+        if(borrow_times >5){
+            redirectAttributes.addFlashAttribute("error", "图书借阅已达上限！");
+        }
+        else{
+            if (lendService.lendBook(bookId, readerId) ) {
+                reserveService.takeBook(bookId, readerId);
+                redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
+            } else {
+                redirectAttributes.addFlashAttribute("error", "图书借阅失败！");
+            }
         }
         return "redirect:/reader_books.html";
     }
@@ -72,7 +87,11 @@ public class LendController {
     public String bookReturn(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         long bookId = Long.parseLong(request.getParameter("bookId"));
         long readerId = ((ReaderCard) request.getSession().getAttribute("readercard")).getReaderId();
-        if (lendService.returnBook(bookId, readerId)) {
+        int status;
+        if(reserveService.bookReserveList(bookId).isEmpty())
+            status = 0;
+        else status = 2;
+        if (lendService.returnBook(bookId, readerId,status) ) {
             redirectAttributes.addFlashAttribute("succ", "图书归还成功！");
         } else {
             redirectAttributes.addFlashAttribute("error", "图书归还失败！");
