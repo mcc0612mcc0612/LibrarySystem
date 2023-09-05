@@ -2,7 +2,7 @@
 
 ## ER图
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=800 height=800 src="https://edrawcloudpubliccn.oss-cn-shenzhen.aliyuncs.com/viewer/self/31181401/share/2023-6-5/1685975939/main.svg"></iframe>
+<embed src="https://edrawcloudpubliccn.oss-cn-shenzhen.aliyuncs.com/viewer/self/31181401/share/2023-6-5/1685975939/main.svg" width="800" height="800" type="image/svg+xml">
 
 ## 数据库表
 
@@ -168,62 +168,60 @@
 
 ### 登录
 
-![image-20230704132211120](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704132211120.png)
+![image-20230704132211120](.\assets\image-20230704132211120.png)
 
 ## 管理员账号
 
-![image-20230704135145819](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135145819.png)
+![image-20230704135145819](.\assets\image-20230704135145819.png)
 
 ### 图书信息
 
 删除，编辑，预约
 
-![image-20230704135208182](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135208182.png)
+![image-20230704135208182](.\assets\image-20230704135208182.png)
 
-![image-20230704135240246](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135240246.png)
+![image-20230704135240246](.\assets\image-20230704135240246.png)
 
 ### 图书增添
 
-![image-20230704135326271](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135326271.png)
+![image-20230704135326271](.\assets\image-20230704135326271.png)
 
 ### 读者信息
 
-![image-20230704135411893](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135411893.png)
+![image-20230704135411893](.\assets\image-20230704135411893.png)
 
 ### 读者增添
 
-![image-20230704135506163](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135506163.png)
+![image-20230704135506163](.\assets\image-20230704135506163.png)
 
 ### 借还管理
 
-![image-20230704135552574](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135552574.png)
+![image-20230704135552574](.\assets\image-20230704135552574.png)
 
 ## 读者账号
 
-![image-20230704135630811](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135630811.png)
+![image-20230704135630811](.\assets\image-20230704135630811.png)
 
 ### 图书借阅，预约，归还
 
-![image-20230704135648919](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135648919.png)
+![image-20230704135648919](.\assets\image-20230704135648919.png)
 
 ### 图书查询
 
-![image-20230704135720923](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135720923.png)
+![image-20230704135720923](.\assets\image-20230704135720923.png)
 
 ## 图书借阅上限约束
 
-![image-20230704135751402](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135751402.png)
+![image-20230704135751402](.\assets\image-20230704135751402.png)
 
 ### 个人信息
 
-![image-20230704135816339](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135816339.png)
+![image-20230704135816339](.\assets\image-20230704135816339.png)
 
 ### 借还日志
 
-![image-20230704135834205](C:\Users\32105\Desktop\coursework\DATABASE\library\assets\image-20230704135834205.png)
+![image-20230704135834205](.\assets\image-20230704135834205.png)
 
 ## 实验贡献
 
-毛陈诚：60%
-
-康敏行：40%
+All by 毛陈诚
