@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.dao.ReserveDao">
+    <insert id="reserveBookOne">
+        insert into reserve_list values
+            (null , #{reader_id} , #{book_id}, current_time,null)
+    </insert>
+    <update id="reserveBookTwo">
+        update book_info set status = IF(status = 1, status, 2) where book_id = #{book_id}
+    </update>
+
+    <update id="takeBook" parameterType="long">
+        update  reserve_list set Get_time = current_time WHERE
+            book_id = #{book_id} and reader_id = #{reader_id} and Get_time is null
+    </update>
+
+    <select id="reader_reserveList" resultType="com.library.bean.Reserve" parameterType="long">
+    select * from reserve_list where reader_id = #{reader_id} and Get_time is null
+    </select>
+
+    <select id="book_reserveList" resultType="com.library.bean.Reserve" parameterType="long">
+        select * from reserve_list where book_id = #{book_id} and Get_time is null
+    </select>
+
+    <select id="readerBook_reserveList" resultType="com.library.bean.Reserve" parameterType="long">
+        select * from reserve_list where reader_id = #{reader_id} book_id = #{book_id}
+    </select>
+
+    <select id="deleteList" parameterType="long">
+        delete * from reserve_list where Reserve_id = #{Reserve_id}
+    </select>
+</mapper>
