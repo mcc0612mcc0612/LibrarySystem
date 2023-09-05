@@ -24,11 +24,14 @@ public class ReserveDao {
     public int reserveBookTwo(final long book_id) {
         return sqlSessionTemplate.update(NAMESPACE + "reserveBookTwo", book_id);
     }
-    public int takeBook(final long book_id,final long reader_id) {
+    public int takeBookOne(final long book_id,final long reader_id) {
         Map<String, Object> map = new HashMap<>();
         map.put("book_id", book_id);
         map.put("reader_id", reader_id);
-        return sqlSessionTemplate.update(NAMESPACE + "takeBook", map);
+        return sqlSessionTemplate.update(NAMESPACE + "takeBookOne", map);
+    }
+    public int takeBookTwo(final long reader_id) {
+        return sqlSessionTemplate.update(NAMESPACE + "takeBookTwo", reader_id);
     }
     public ArrayList<Reserve> reader_reserveList(final long reader_id) {
         List<Reserve> result = sqlSessionTemplate.selectList(NAMESPACE + "reader_reserveList",reader_id);

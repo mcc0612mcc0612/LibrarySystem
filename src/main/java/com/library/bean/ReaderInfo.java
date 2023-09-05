@@ -8,7 +8,7 @@ public class ReaderInfo implements Serializable {
     private long reader_id;
     private String name;
     private String sex;
-    private Date birth;
+    private String birth;
     private String address;
     private String phone;
 
@@ -36,11 +36,11 @@ public class ReaderInfo implements Serializable {
         this.sex = sex;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 

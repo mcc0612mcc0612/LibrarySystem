@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 @Controller
 public class ReaderController {
@@ -30,19 +31,13 @@ public class ReaderController {
 
     private ReaderInfo getReaderInfo(long readerId, String name, String sex, String birth, String address, String phone) {
         ReaderInfo readerInfo = new ReaderInfo();
-        Date date = new Date();
-        try {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            date = df.parse(birth);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+        readerInfo.setBirth(birth);
         readerInfo.setAddress(address);
         readerInfo.setName(name);
         readerInfo.setReaderId(readerId);
         readerInfo.setPhone(phone);
         readerInfo.setSex(sex);
-        readerInfo.setBirth(date);
         return readerInfo;
     }
 

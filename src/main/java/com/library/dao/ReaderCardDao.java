@@ -48,6 +48,9 @@ public class ReaderCardDao {
     public String getPassword(final long reader_id) {
         return sqlSessionTemplate.selectOne(NAMESPACE + "getPassword", reader_id);
     }
+    public int getBorrowTime(final long reader_id){
+        return sqlSessionTemplate.selectOne(NAMESPACE + "getBorrowTime", reader_id);
+    }
 
     public int deleteReaderCard(final long reader_id) {
         return sqlSessionTemplate.delete(NAMESPACE + "deleteReaderCard", reader_id);

@@ -69,25 +69,26 @@ background-attachment: fixed;">
         <table class="table table-hover">
             <thead>
             <tr>
+                <th>ID</th>
                 <th>书名</th>
                 <th>作者</th>
                 <th>出版社</th>
                 <th>ISBN</th>
                 <th>价格</th>
-                <th>剩余数量</th>
                 <th>借还</th>
+                <th>预约</th>
                 <th>详情</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${books}" var="book">
                 <tr>
+                    <td><c:out value="${book.bookId}"></c:out></td>
                     <td><c:out value="${book.name}"></c:out></td>
                     <td><c:out value="${book.author}"></c:out></td>
                     <td><c:out value="${book.publish}"></c:out></td>
                     <td><c:out value="${book.isbn}"></c:out></td>
                     <td><c:out value="${book.price}"></c:out></td>
-                    <td><c:out value="${book.number}"></c:out></td>
 
                     <c:set var="flag" value="false"/>
                     <c:forEach var="lend" items="${myLendList}">
@@ -95,26 +96,64 @@ background-attachment: fixed;">
                             <c:set var="flag" value="true"/>
                         </c:if>
                     </c:forEach>
+                    <c:set var="reserve_flag" value="false"/>
+                    <c:forEach var="reserve" items="${myReserveList}">
+                        <c:if test="${reserve eq book.bookId}">
+                            <c:set var="reserve_flag" value="true"/>
+                        </c:if>
+                    </c:forEach>
+
                     <c:if test="${flag}">
                         <td><a href="returnbook.html?bookId=<c:out value="${book.bookId}"></c:out>">
                             <button type="button" class="btn btn-danger btn-xs">归还</button>
                         </a></td>
                     </c:if>
                     <c:if test="${not flag}">
-                        <c:if test="${book.number>0}">
+                        <c:if test="${book.status == 0}">
                             <td><a href="lendbook.html?bookId=<c:out value="${book.bookId}"></c:out>">
                                 <button type="button" class="btn btn-primary btn-xs">借阅</button>
                             </a></td>
                         </c:if>
-                        <c:if test="${book.number==0}">
+                        <c:if test="${book.status == 2}">
+                            <c:if test="${reserve_flag}">
+                                <td><a href="lendbook.html?bookId=<c:out value="${book.bookId}"></c:out>">
+                                    <button type="button" class="btn btn-primary btn-xs">借阅</button>
+                                </a></td>
+                            </c:if>
+                            <c:if test="${not reserve_flag}">
+                                <td>
+                                    <button type="button" class="btn btn-default btn-xs" disabled="disabled">未预约</button>
+                                </td>
+                            </c:if>
+                        </c:if>
+                        <c:if test="${book.status == 1}">
                             <td>
-                                <button type="button" class="btn btn-defalut btn-xs" disabled="disabled">已空</button>
+                                <button type="button" class="btn btn-default btn-xs" disabled="disabled">已被借阅</button>
                             </td>
                         </c:if>
                     </c:if>
-                    <td><a href="reader_book_detail.html?bookId=<c:out value="${book.bookId}"></c:out>">
-                        <button type="button" class="btn btn-success btn-xs">详情</button>
-                    </a></td>
+
+                    <c:if test="${flag}">
+                        <td>
+                            <button type="button" class="btn btn-default btn-xs" disabled="disabled">您已借阅</button>
+                        </td>
+                    </c:if>
+                    <c:if test="${not flag}">
+                        <c:if test="${not reserve_flag}">
+                            <td><a href="reservebook.html?bookId=<c:out value="${book.bookId}"></c:out>">
+                                <button type="button" class="btn btn-primary btn-xs">预约</button>
+                            </a></td>
+                        </c:if>
+                        <c:if test="${reserve_flag}">
+                            <td>
+                                <button type="button" class="btn btn-default btn-xs" disabled="disabled">已预约</button>
+                            </td>
+                        </c:if>
+                    </c:if>
+
+                <td><a href="reader_book_detail.html?bookId=<c:out value="${book.bookId}"></c:out>">
+                    <button type="button" class="btn btn-success btn-xs">详情</button>
+                </a></td>
                 </tr>
             </c:forEach>
             </tbody>

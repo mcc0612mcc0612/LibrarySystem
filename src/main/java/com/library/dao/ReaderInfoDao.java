@@ -38,7 +38,10 @@ public class ReaderInfoDao {
 
     public final long addReaderInfo(final ReaderInfo readerInfo) {
         if (sqlSessionTemplate.insert(NAMESPACE + "addReaderInfo", readerInfo) > 0) {
-            return sqlSessionTemplate.selectOne(NAMESPACE + "getReaderId", readerInfo);
+             List<Long> user = sqlSessionTemplate.selectList(NAMESPACE + "getReaderId", readerInfo);
+             if(user.size() != 0)
+                return user.get(user.size() - 1);
+             else  return -1;
         } else {
             return -1;
         }

@@ -2,9 +2,11 @@ package com.library.controller;
 
 import com.library.bean.Book;
 import com.library.bean.Lend;
+import com.library.bean.Reserve;
 import com.library.bean.ReaderCard;
 import com.library.service.BookService;
 import com.library.service.LendService;
+import com.library.service.ReserveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,8 @@ public class BookController {
     private BookService bookService;
     @Autowired
     private LendService lendService;
+    @Autowired
+    private ReserveService reserveService;
 
     private Date getDate(String pubstr) {
         try {
@@ -74,7 +78,7 @@ public class BookController {
 
     @RequestMapping("/book_add_do.html")
     public String addBookDo(@RequestParam(value = "pubstr") String pubstr, Book book, RedirectAttributes redirectAttributes) {
-        book.setPubdate(getDate(pubstr));
+        book.setPubdate(pubstr);
         if (bookService.addBook(book)) {
             redirectAttributes.addFlashAttribute("succ", "图书添加成功！");
         } else {
@@ -94,8 +98,8 @@ public class BookController {
 
     @RequestMapping("/book_edit_do.html")
     public String bookEditDo(@RequestParam(value = "pubstr") String pubstr, Book book, RedirectAttributes redirectAttributes) {
-        book.setPubdate(getDate(pubstr));
-        if (bookService.editBook(book)) {
+        book.setPubdate(pubstr);
+         if (bookService.editBook(book)) {
             redirectAttributes.addFlashAttribute("succ", "图书修改成功！");
         } else {
             redirectAttributes.addFlashAttribute("error", "图书修改失败！");
@@ -136,16 +140,24 @@ public class BookController {
         ArrayList<Book> books = bookService.getAllBooks();
         ReaderCard readerCard = (ReaderCard) request.getSession().getAttribute("readercard");
         ArrayList<Lend> myAllLendList = lendService.myLendList(readerCard.getReaderId());
+        ArrayList<Reserve> myAllReserveList = reserveService.myReserveList(readerCard.getReaderId());
         ArrayList<Long> myLendList = new ArrayList<>();
+        ArrayList<Long> myReserveList = new ArrayList<>();
         for (Lend lend : myAllLendList) {
             // 是否已归还
             if (lend.getBackDate() == null) {
                 myLendList.add(lend.getBookId());
             }
         }
+        for(Reserve reserve: myAllReserveList){
+            if(reserve.getGet_time() == null){
+                myReserveList.add(reserve.getBookId());
+            }
+        }
         ModelAndView modelAndView = new ModelAndView("reader_books");
         modelAndView.addObject("books", books);
         modelAndView.addObject("myLendList", myLendList);
+        modelAndView.addObject("myReserveList", myReserveList);
         return modelAndView;
     }
 }

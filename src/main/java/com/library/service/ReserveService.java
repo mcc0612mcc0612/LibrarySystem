@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 @Service
 public class ReserveService {
+
     @Autowired
     public ReserveDao reserveDao;
     public boolean reserveBookOne(long bookId,long readerId){
@@ -22,7 +23,7 @@ public class ReserveService {
     }
     public boolean takeBook(long bookId,long readerId){
 
-        return reserveDao.takeBook(bookId,readerId)>0;
+        return reserveDao.takeBookOne(bookId,readerId)>0 && reserveDao.takeBookTwo(readerId)>0;
     }
     public ArrayList<Reserve> myReserveList(final long reader_id){
         return reserveDao.reader_reserveList(reader_id);

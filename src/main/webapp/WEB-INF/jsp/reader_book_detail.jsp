@@ -61,11 +61,14 @@ background-attachment: fixed;">
                 </tr>
                 <tr>
                     <th>状态</th>
-                    <c:if test="${detail.number>1}">
+                    <c:if test="${detail.status==0}">
                         <td>在馆</td>
                     </c:if>
-                    <c:if test="${detail.number==0}">
+                    <c:if test="${detail.status==1}">
                         <td>借出</td>
+                    </c:if>
+                    <c:if test="${detail.status==2}">
+                        <td>被预约</td>
                     </c:if>
 
                 </tr>

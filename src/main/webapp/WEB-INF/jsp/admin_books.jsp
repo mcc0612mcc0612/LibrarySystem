@@ -72,7 +72,6 @@ background-attachment: fixed;">
                 <th>出版社</th>
                 <th>ISBN</th>
                 <th>价格</th>
-                <th>剩余数量</th>
                 <th>详情</th>
                 <th>编辑</th>
                 <th>删除</th>
@@ -86,7 +85,6 @@ background-attachment: fixed;">
                 <td><c:out value="${book.publish}"></c:out></td>
                 <td><c:out value="${book.isbn}"></c:out></td>
                 <td><c:out value="${book.price}"></c:out></td>
-                <td><c:out value="${book.number}"></c:out></td>
                 <td><a href="admin_book_detail.html?bookId=<c:out value="${book.bookId}"></c:out>">
                     <button type="button" class="btn btn-success btn-xs">详情</button>
                 </a></td>

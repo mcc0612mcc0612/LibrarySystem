@@ -9,10 +9,16 @@
         update book_info set status = IF(status = 1, status, 2) where book_id = #{book_id}
     </update>
 
-    <update id="takeBook" parameterType="long">
+    <update id="takeBookOne" parameterType="long">
         update  reserve_list set Get_time = current_time WHERE
-            book_id = #{book_id} and reader_id = #{reader_id} and Get_time is null
+            reader_id = #{reader_id} and book_id = #{book_id} and Get_time is null
     </update>
+
+    <update id="takeBookTwo" parameterType="long">
+        update  reader_card  set reserve_time=reserve_time-1
+        where reader_id = #{reader_id}
+    </update>
+
 
     <select id="reader_reserveList" resultType="com.library.bean.Reserve" parameterType="long">
     select * from reserve_list where reader_id = #{reader_id} and Get_time is null

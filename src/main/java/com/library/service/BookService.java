@@ -40,4 +40,8 @@ public class BookService {
         return bookDao.deleteBook(bookId) > 0;
     }
 
+    public boolean bookisLend(Long bookId) {
+        return bookDao.bookisLend(bookId) > 0;
+    }
+
 }

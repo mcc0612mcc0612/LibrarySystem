@@ -29,7 +29,11 @@
     <select id="getBook" resultType="com.library.bean.Book" parameterType="long">
         select * from book_info where book_id = #{book_id}
     </select>
+    <select id="bookislend" resultType="int" parameterType="long">
+        select count(*) from lend_list where book_id = #{book_id} AND back_date IS NULL
+    </select>
     <delete id="deleteBook" parameterType="long">
         delete from book_info where book_id = #{book_id}
     </delete>
+
 </mapper>

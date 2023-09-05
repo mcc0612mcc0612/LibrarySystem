@@ -1,6 +1,7 @@
 package com.library.dao;
 
 import com.library.bean.Book;
+import com.library.bean.Lend;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +29,9 @@ public class BookDao {
 
     public ArrayList<Book> getAllBooks() {
         List<Book> result = sqlSessionTemplate.selectList(NAMESPACE + "getAllBooks");
+        if(result == null) {
+            return new ArrayList<Book>();
+        }
         return (ArrayList<Book>) result;
     }
 
@@ -45,5 +49,9 @@ public class BookDao {
 
     public int deleteBook(final long bookId) {
         return sqlSessionTemplate.delete(NAMESPACE + "deleteBook", bookId);
+    }
+
+    public int bookisLend(final long bookId) {
+        return sqlSessionTemplate.selectOne(NAMESPACE + "bookislend", bookId);
     }
 }

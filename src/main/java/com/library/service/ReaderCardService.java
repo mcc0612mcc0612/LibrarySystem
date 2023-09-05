@@ -13,6 +13,9 @@ public class ReaderCardService {
     public boolean addReaderCard(ReaderInfo readerInfo, String password){
         return  readerCardDao.addReaderCard(readerInfo,password)>0;
     }
+    public int getBorrowTime(long readerId){
+        return  readerCardDao.getBorrowTime(readerId);
+    }
     public boolean updatePassword(long readerId, String password){
         return readerCardDao.resetPassword(readerId,password)>0;
     }
